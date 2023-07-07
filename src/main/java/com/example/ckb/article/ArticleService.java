@@ -1,6 +1,5 @@
 package com.example.ckb.article;
 
-import com.example.ckb.DataNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -31,7 +30,7 @@ public class ArticleService {
         if(article.isPresent()){
             return article.get();
         }else{
-            throw new  DataNotFoundException("article not found");
+            return null;
         }
     }
 }
