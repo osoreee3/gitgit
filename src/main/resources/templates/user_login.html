@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+  <a href="/article/list">SBB</a>
+  <a href="/user/userCreate">회원가입</a>
+  <ul>
+    <li>
+      <a class="nav-link" sec:authorize="isAnonymous()" th:href="@{/user/login}">로그인</a>
+      <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/user/logout}">로그아웃</a>
+    </li>
+  </ul>
+</div>
+<form th:action="@{/user/login}" method="post">
+  <div>
+    <label for="username">ID</label>
+    <input type="text" name="username" id="username">
+  </div>
+  <div>
+    <label for="password">PASSWORD</label>
+    <input type="text" name="password" id="password">
+  </div>
+  <button type="submit">로그인</button>
+</form>
+</body>
+</html>

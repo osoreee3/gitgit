@@ -15,9 +15,8 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import static org.codehaus.groovy.runtime.DefaultGroovyMethods.and;
 
-@Configuration  // 스프링의 환경설정 파일임을 의미
-@EnableWebSecurity  //모든 오청 url이 스프링 시큐리티의 제어를 받도록 만드는
-//@EnableWebSecurity 애너테이션을 사용하면 내부적으로 SpringSecurityFilterChain이 동작하여 URL 필터가 적용된다.
+@Configuration
+@EnableWebSecurity
 @EnableMethodSecurity(prePostEnabled = true)
 public class SecurityConfig {
 

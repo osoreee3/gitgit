@@ -1,5 +1,6 @@
 package com.example.ckb.article;
 
+import com.example.ckb.user.SiteUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,12 +18,13 @@ public class ArticleService {
         return this.articleRepository.findAll();
     }
 
-    public void create(String subject, String content){
+    public void create(String subject, String content, SiteUser user){
 
         Article a = new Article();
         a.setSubject(subject);
         a.setContent(content);
         a.setCreateDate(LocalDateTime.now());
+        a.setAuthor(user);
         this.articleRepository.save(a);
     }
     public Article getarticle(Integer id){
@@ -33,4 +35,12 @@ public class ArticleService {
             return null;
         }
     }
+    public void modify(Article article, String subject, String content){
+       article.setSubject(subject);
+       article.setContent(content);
+       article.setCreateDate(LocalDateTime.now());
+       this.articleRepository.save(article);
+
+    }
+
 }

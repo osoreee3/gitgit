@@ -5,7 +5,18 @@
     <title>Title</title>
 </head>
 <body>
-<form th:action="@{/article/create}" th:object="${articleForm}"  method="post">
+<div>
+    <a href="/article/list">SBB</a>
+    <a href="/user/userCreate">회원가입</a>
+    <ul>
+        <li>
+            <a class="nav-link" sec:authorize="isAnonymous()" th:href="@{/user/login}">로그인</a>
+            <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/user/logout}">로그아웃</a>
+        </li>
+    </ul>
+</div>
+<form th:object="${articleForm}"  method="post">
+    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
     <div class="article-subject">
         <label>
             <input type="text" th:field="*{subject}" placeholder="제목을 입력해주세요.">

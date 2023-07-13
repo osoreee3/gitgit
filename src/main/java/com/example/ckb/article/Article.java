@@ -1,5 +1,6 @@
 package com.example.ckb.article;
 
+import com.example.ckb.user.SiteUser;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -23,4 +24,9 @@ public class Article {
     private String content;//내용
 
     private LocalDateTime createDate;
+
+    @ManyToOne
+    private SiteUser author;
+
+    private LocalDateTime modifyDate;
 }
