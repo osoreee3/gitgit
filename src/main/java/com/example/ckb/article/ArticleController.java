@@ -21,12 +21,12 @@ public class ArticleController {
         return "article_list";
     }
 
-    @GetMapping("/list")
-    public String list(Model model) {
+@GetMapping("/list")
+public String list(Model model){
         List<Article> articleList = this.articleService.getList();
         model.addAttribute("articleList",articleList);
         return "article_list";
-    }
+}
 
     @GetMapping("/create")
     public String create(ArticleForm articleForm){

@@ -5,6 +5,7 @@
     <title>Title</title>
 </head>
 <body>
+
 <table>
     <thead>
     <tr>
@@ -16,8 +17,8 @@
     <tbody>
     <tr th:each="article : ${articleList}">
         <td th:text="${article.subject}"></td>
-        <td >
-            <a th:href="@{|/article/detail/${article.id}|}" th:text="${article.subject}"></a>
+        <td>
+            <a th:href="@{|/article/detail/${article.id}|}" th:text="${article.content}"></a>
         </td>
         <td th:text="${article.createDate}"></td>
     </tr>
