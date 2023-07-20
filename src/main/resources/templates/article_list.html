@@ -15,24 +15,38 @@
         </li>
     </ul>
 </div>
+<div class="input-group">
+    <input type="text" id="search_kw" class="form-control" th:value="${kw}">
+    <button type="button" id="btn_search">찾기</button>
+</div>
 <table>
     <thead>
     <tr>
+        <th>번호</th>
         <th>제목</th>
         <th>내용</th>
         <th>작성일지</th>
     </tr>
     </thead>
     <tbody>
-    <tr th:each="article : ${articleList}">
+    <tr th:each="article, loop : ${articleList}">
+        <td th:text="${loop.count}"></td>
         <td th:text="${article.subject}"></td>
         <td>
             <a th:href="@{|/article/detail/${article.id}|}" th:text="${article.content}"></a>
         </td>
-        <td th:text="${article.createDate}"></td>
-    </tr>
+        <td th:text="${#temporals.format(article.createDate, 'yyyy-MM-dd HH:mm')}"></td>    </tr>
     </tbody>
 </table>
 <a th:href="@{/article/create}">질문등록하기</a>
 </body>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#btn_search").click(function () {
+            var keyword = $("#search_kw").val();
+            window.location.href = "/article/list?kw=" + encodeURIComponent(keyword);
+        });
+    });
+</script>
 </html>

@@ -1,7 +1,10 @@
 package com.example.ckb.article;
 
 import com.example.ckb.user.SiteUser;
+import jakarta.persistence.criteria.*;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -34,6 +37,8 @@ public class ArticleService {
         }else{
             return null;
         }
+
+
     }
     public void modify(Article article, String subject, String content){
        article.setSubject(subject);
@@ -41,6 +46,29 @@ public class ArticleService {
        article.setCreateDate(LocalDateTime.now());
        this.articleRepository.save(article);
 
+    }
+
+    public void deleteArticle(Article article) {
+        articleRepository.delete(article);
+    }
+
+    private Specification<Article> search(String kw) {
+        return new Specification<>() {
+            private static final long serialVersionUID = 1L;
+            @Override
+            public Predicate toPredicate(Root<Article> q, CriteriaQuery<?> query, CriteriaBuilder cb) {
+                query.distinct(true);
+                Join<Article, SiteUser> u1 = q.join("author", JoinType.LEFT);
+                return cb.or(cb.like(q.get("subject"), "%" + kw + "%"),
+                        cb.like(q.get("content"), "%" + kw + "%"),
+                        cb.like(u1.get("username"), "%" + kw + "%"));
+
+            }
+        };
+    }
+    public List<Article> getArticle(String kw) {
+        Specification<Article> spec = search(kw);
+        return this.articleRepository.findAll(spec);
     }
 
 }
