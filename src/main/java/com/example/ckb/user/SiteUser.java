@@ -15,9 +15,7 @@ public class SiteUser {
     @Column
     private String username;
 
-
     private String password;
-
 
     @Column
     private String email;
